@@ -1,0 +1,172 @@
+body {margin:0;padding:0;font-family: 'Nunito', sans-serif;font-size: 16px;font-weight: 400;color: #616161;}
+* {margin:0;padding:0;}
+.imgGraph {
+    background: #fff;
+    padding: 30px 25px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+.productImg {
+    width: 30%;
+}
+.graph {
+    width: 67%;
+    margin-left: 30px;
+}
+.graph .nav-pills {
+    justify-content: flex-end;
+}
+.graph .nav-pills .nav-link.active, .graph .nav-pills .show>.nav-link {
+    color: #fff;
+    background-color: #52585c;
+}
+.graph .tab-content .tab-pane {
+    margin-top: 15px;
+}
+.graph .nav-pills li a {
+    background: #efeff0;
+    border-radius: 0 !important;
+    font-size: 18px;
+    font-weight: 900;
+    padding: 5px 10px;
+    color: #a3a3a3;
+    border-top: 1px solid #52585c;
+    border-bottom: 1px solid #52585c;
+}
+.graph .nav-pills li:first-child a {
+    border-left: 1px solid #52585c;
+}
+.graph .nav-pills li:nth-child(2) a {
+    border-left: 1px solid #52585c;
+    border-right: 1px solid #52585c;
+}
+.graph .nav-pills li:last-child a {
+    border-right: 1px solid #52585c;
+}
+.productSection {
+    background: #e7e7e7;
+    padding: 50px 0;
+}
+.selectButtons {
+    background: #5f72fd;
+    padding: 20px 25px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.storeBtn button, .addNewBtn button {
+    background: rgba(255,255,255,.3);
+    border-color: #fff;
+    border-radius: 10px;
+    padding: 10px 60px;
+    font-size: 16px;
+    font-weight: 900;
+}
+
+.storeBtn button:first-child {
+    margin-right: 20px;
+}
+.addNewBtn button {
+    background: #f4802a;
+    border-color:#f4802a;
+    box-shadow: 0 8px 0px 0 #b65208;
+    padding: 10px 20px;
+}
+.seasonDress {
+    background: #fff;
+    border-radius: 15px;
+    border: 1px solid #ccc;
+    margin-top: 30px;
+}
+.seasonDress .table {
+    margin-bottom: 0;
+}
+.seasonDress .table td, .seasonDress .table th {
+    padding: 8px;
+}
+.seasonDress .table thead th {
+    border: unset;
+    font-size: 20px;
+    font-weight: 900;
+    text-align: center;
+    color: #000;
+}
+.seasonDress .table tbody td {
+    vertical-align: middle;text-align: center;
+}
+.seasonDress .table tbody td span {
+    font-size: 14px;
+    font-weight: 700;
+    color: #000;
+    line-height: 1.4;
+}
+.seasonDress .table tbody td .greentext {
+    color: #24b500 !important;
+}
+.seasonDress .table tbody td .redText {
+    color: #f60000 !important;
+}
+.seasonDress .table tbody td .yellowtext {
+    color: #ffc908 !important;
+}
+.seasonDress .table tbody td .greyText {
+    color: #a0a0a0 !important;
+}
+.seasonDress .table tbody td i {
+    vertical-align: middle;font-size: 20px;
+}
+.bigText {
+    font-size: 21px !important;
+    font-weight: 900 !important;
+}
+.seasonDress .table tbody tr {
+    border-bottom: 1px solid #ccc;
+}
+.seasonDress .table tbody tr:last-child {
+    border-bottom: unset;
+}
+.seasonDress .table tbody tr:last-child td {
+    padding-top: 100px;
+}
+
+
+/*** Media Screens ****/
+@media only screen and (min-width:100px) and (max-width:767px) {
+    .selectButtons {
+        display: block;
+        padding: 20px 20px;
+    }
+    .storeBtn button, .addNewBtn button {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+    .imgGraph {
+        flex-wrap: wrap;
+        flex-direction: column-reverse;
+         padding: 20px 20px;
+    }
+    .productImg {
+        width: 100%;
+        }
+    .graph {
+        width: 100%;
+        margin-left: 0px;
+        margin-bottom: 20px;
+    }
+    .bigText {
+        font-size: 20px !important;
+    }
+    .seasonDress .table tbody td span {
+        font-size: 12px;
+    }
+    .seasonDress .table tbody td img {
+        width: 45px;
+    }
+    .seasonDress .table thead th {
+        font-size: 18px;
+    }
+}
