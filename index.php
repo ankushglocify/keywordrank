@@ -1,7 +1,7 @@
 <?php 
  include('./config/DbFunction.php');
 /*if(isset($_POST) ){
-	
+	fgfdg
 	
 	 $obj=new DbFunction();
 	 $_SESSION['login']=$_POST['id'];
