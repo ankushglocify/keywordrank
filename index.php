@@ -1,13 +1,10 @@
 <?php 
  include('./config/DbFunction.php');
-/*if(isset($_POST) ){
-	fgfdg
-	
+
 	 $obj=new DbFunction();
-	 $_SESSION['login']=$_POST['id'];
-	 $obj->login($_POST['id'],$_POST['password']);
-}*/
-	
+	 $keywords = $obj->getKeyeordProduct();
+   //echo "<pre>";
+	 //print_r($keywords);die('test');
 
 ?>
 <!DOCTYPE html>
@@ -33,13 +30,13 @@
           <div class="graph">
             <ul class="nav nav-pills" role="tablist">
                 <li class="nav-item">
-                  <a class="nav-link active" data-toggle="pill" href="#home">D</a>
+                  <a class="nav-link active dynagraph" data-id=""  data-day="1" data-toggle="pill" href="#home">D</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" data-toggle="pill" href="#menu1">W</a>
+                  <a class="nav-link dynagraph" data-id="" data-day="7" data-toggle="pill" href="#home">W</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" data-toggle="pill" href="#menu2">M</a>
+                  <a class="nav-link dynagraph" data-id="" data-dat="30" data-toggle="pill" href="#home">M</a>
                 </li>
               </ul>
               <div class="tab-content">
@@ -56,23 +53,91 @@
           </div>
         </div>
       </div>
-      <div class="col-md-12 col-sm-12">
+      <!-- <div class="col-md-12 col-sm-12">
          <div class="addBtns">
             <button type="button" class="btn btn-default addUserBtn" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-file-import"></i> <span>Import</span></button>
           </div>
-      </div>
+      </div> -->
       <div class="col-md-12 col-sm-12">
         <div class="selectButtons">
           <div class="storeBtn">
-           <button type="button" class="btn btn-primary">Store</button>
-           <button type="button" class="btn btn-primary">Keyword</button>
+          <!--  <button type="button" class="btn btn-primary">Store</button>
+           <button type="button" class="btn btn-primary">Keyword</button> -->
           </div>
          
           <div class="addNewBtn">
-           <button type="button" class="btn btn-primary"><i class="fas fa-plus"></i> Add New</button>
+            <button type="button" class="btn btn-default addUserBtn" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-file-import"></i> <span>Import</span></button>
+          <!--  <button type="button" class="btn btn-primary"><i class="fas fa-plus"></i> Add New</button> -->
           </div>
         </div>
       </div>
+      <?php 
+        foreach ($keywords as $keyw => $keyword) {
+          
+         ?>
+
+            <div class="col-lg-6 col-md-12 col-sm-12">
+              <div class="seasonDress">
+               <div class="table-responsive">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th colspan="4"><?php echo $keyw;?></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <?php
+                      foreach ($keyword as $key => $value) { 
+
+                        $rankRatio = $obj->rankRatio($value[0],$value[2],$keyw);
+                        //print_r($rankRatio);die
+                        ?>
+
+                      <tr class="graph_id" data-id ="<?php echo $value[2];?>">
+                        <td><span class="bigText"><?php echo $value[0];?></span></td>
+                        <td><img class="img-fluid" src="<?php echo $value[8];?>" alt=""/></td>
+                        <td><span><?php echo $value[3];?></span></td>
+
+                        <?php 
+                        $class = "";
+                          $icon = '';
+                          $rightRank ='' ;
+                        if($rankRatio > $value[0]){
+                          $class = "greentext";
+                          $icon = '<i class="fas fa-caret-up"></i>';
+                          $rightRank = $rankRatio - $value[0] ;
+                          }elseif ($rankRatio < $value[0]) {
+                            $class = "redText";
+                            $icon = '<i class="fas fa-caret-down"></i>';
+                            $rightRank =  $value[0] - $rankRatio ;
+                          }elseif ($rankRatio == $value[0]) {
+                            $class = "greyText";
+                            $icon = '<i class="fas fa-equals"></i>';
+                          }else {
+                            $class = "yellowtext";
+                            $rightRank ="New";
+                          }
+                        ?>
+                        <td><span class="<?php echo $class; ?>"><?php echo $icon; ?></span> <span class="<?php echo $class; ?>"><?php echo $rightRank; ?></span></td>
+                        
+                      </tr>
+                      
+                      <?php
+                    }
+                    ?>
+                    <tr>
+                        <td colspan="4"><span>Last update 2021/04/06 02:22PM</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+
+          <?php
+        }
+      ?>
       <div class="col-lg-6 col-md-12 col-sm-12">
         <div class="seasonDress">
          <div class="table-responsive">
@@ -115,7 +180,7 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-6 col-md-12 col-sm-12">
+    <!--   <div class="col-lg-6 col-md-12 col-sm-12">
         <div class="seasonDress">
          <div class="table-responsive">
             <table class="table">
@@ -156,8 +221,8 @@
             </table>
           </div>
         </div>
-      </div>
-      <div class="col-lg-6 col-md-12 col-sm-12">
+      </div> -->
+     <!--  <div class="col-lg-6 col-md-12 col-sm-12">
         <div class="seasonDress">
          <div class="table-responsive">
             <table class="table">
@@ -198,7 +263,7 @@
             </table>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
   <!-- Modal -->
@@ -213,8 +278,8 @@
       </div>
       <div class="modal-body">
        <!-- Form -->
-        <form method='post' action='' enctype="multipart/form-data" id="import_form">
-          Select file : <input type='file' name='file' id='file_import' class='form-control' ><br>
+        <form method='post' action='import.php' enctype="multipart/form-data" id="import_form">
+          Select file : <input type='file' name='file' id='file_import' class='form-control' required ><br>
         </form>
 
         <!-- Preview-->
@@ -234,7 +299,45 @@
   <script src="./assets/js/bootstrap.min.js"></script>
   <script src="./assets/js/custom.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+  <!-- <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script> -->
   <script>
+    jQuery('.graph_id').on('click',function(e){
+      var id = jQuery(this).data('id');
+      jQuery.ajax({
+            type: 'post',
+            url: 'graph.php',
+            dataType: "json",
+            crossDomain : true,
+            data: {
+              "product_id": id
+            },
+            success: function ( data ) {
+              var xValues = data.xdata;
+              var yValues = data.ydata;
+              var max = data.max;
+              jQuery(".dynagraph").attr('data-id',id);
+            new Chart("myChart", {
+                type: "line",
+                data: {
+                  labels: xValues,
+                  datasets: [{
+                    fill: false,
+                    lineTension: 0,
+                    backgroundColor: "rgba(0,0,255,1.0)",
+                    borderColor: "rgba(0,0,255,0.1)",
+                    data: yValues
+                  }]
+                },
+                options: {
+                  legend: {display: false},
+                  scales: {
+                    yAxes: [{ticks: {min: 0, max:max}}],
+                  }
+                }
+              });
+            }
+          });
+    });
       var xValues = [50,60,70,80,90,100,110,120,130,140,150];
       var yValues = [7,8,8,9,9,9,10,11,14,14,15];
 
@@ -253,7 +356,7 @@
         options: {
           legend: {display: false},
           scales: {
-            yAxes: [{ticks: {min: 6, max:16}}],
+            yAxes: [{ticks: {min: 0, max:18}}],
           }
         }
       });

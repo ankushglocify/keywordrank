@@ -132,7 +132,9 @@ body {margin:0;padding:0;font-family: 'Nunito', sans-serif;font-size: 16px;font-
 .seasonDress .table tbody tr:last-child td {
     padding-top: 100px;
 }
-
+.graph_id .img-fluid {
+    max-width: 70px !important;
+}
 
 /*** Media Screens ****/
 @media only screen and (min-width:100px) and (max-width:767px) {
